@@ -1,12 +1,10 @@
 // Generate 3 random emojis for the title
-  // pick an emojis <= 1559, becuase after they are all country codes
-  // if emoji is 🩷 then skip
-
+  
 function getRandomEmoji() {
   let randomEmoji;
   do { 
-    randomEmoji = emojisObject[Math.round(1559 * Math.random())].emoji
-  } while (randomEmoji == '🩷'); 
+    randomEmoji = emojisObject[Math.round(1559 * Math.random())].emoji // emojis after 1559 are country codes
+  } while (randomEmoji == '🩷'); // skip if emoji isn't rendering
   return randomEmoji;
 };
 
@@ -14,29 +12,35 @@ document.getElementById('title').innerHTML =
 getRandomEmoji() + getRandomEmoji() + getRandomEmoji();
 
 
-// Insert Emoji Database into the HTML
+// Insert Emojis Database into the HTML
 
+// don't load in all the emojis, instead, search through them and then load the matching ones in below search function
+
+// let emojisContainer = document.getElementById('emojisDiv');
+// for (let i = 0; i < emojisObject.length; i++) {
+//   let emojiHTML = '<p style="display: none;">test</p>'; 
+//   emojisContainer.innerHTML += emojiHTML; 
+// }
 
 // Search Function
-// adapted from https://www.w3schools.com/howto/howto_js_filter_lists.asp
+// add regex to make it match any letters
 
 function emojiSearch() {
   // Declare variables
-  let input, filter, div, li, a, txtValue;
+  let input, filter, regex, emojisContainer, a, txtValue; 
   input = document.getElementById('emojiSearch');
-  filter = input.value.toUpperCase();
-  div = document.getElementById("emojisDiv");
-  emojis = div.getElementsByTagName('div');
+  filter = input.value.toLowerCase();
+  emojisContainer = document.getElementById("emojisDiv");
+  //emojis = div.getElementsByTagName('div');
 
-  // Loop through all emojis, and hide those who don't match the search query
-  for (let i = 0; i < emojis.length; i++) {
-    a = emojis[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      emojis[i].style.display = "";
-    } else {
-      emojis[i].style.display = "none";
+  
+  // loop through all emojis, and add those that match the search query to the HTML
+  
+  for (let i = 0; i < emojisObject.length; i++) {
+    if (emojisObject[i].keywords.indexOf(filter) != -1) {
+      emojisContainer.innerHTML += emojisObject[i].emoji;
     }
+  input.onkeydown = (event) => { emojisContainer.innerHTML = "" };
   }
 }
 
