@@ -1,15 +1,17 @@
-// 3 Random Emojis for the Title
+// GENERATE 3 RANDOM EMOJIS FOR THE TITLE
   
 function getRandomEmoji() {
   let randomEmoji = emojisObject[Math.round(1559 * Math.random())].emoji; // emojis after 1559 are country codes
   return randomEmoji;
 };
 
-document.getElementById('title').innerHTML = 
-getRandomEmoji() + getRandomEmoji() + getRandomEmoji();
+for (let i = 0; i < 3; i++) {
+  document.getElementById('title').innerHTML += 
+  getRandomEmoji();
+}
 
 
-// Search Function
+// SEARCH FUNCTION
 
 function emojiSearch() {
 
@@ -22,9 +24,9 @@ function emojiSearch() {
   for (let i = 0; i < emojisObject.length; i++) {
     for (let j = 0; j < emojisObject[i].keywords.length; j++)
     {
-      if (filter.length >= 3 && emojisObject[i].keywords[j].search(filter) != -1) {
+      if (filter.length > 2 && emojisObject[i].keywords[j].search(filter) != -1) {
         emojisContainer.innerHTML += 
-        '<a href="#" class="m-2">' + emojisObject[i].emoji + '</a>';
+        '<a href="javascript:;" onclick="copyEmoji(event)" class="m-2">' + emojisObject[i].emoji + '</a>';
         break;
       }
     }
@@ -32,13 +34,18 @@ function emojiSearch() {
   input.onkeydown = (event) => { emojisContainer.innerHTML = "" };
 }
 
-// OLD Code:
+// FUNCTION TO COPY EMOJI
 
-  // loop through all emojis, and add those that match the search query to the HTML
-  // for (let i = 0; i < emojisObject.length; i++) {
-  //   if (emojisObject[i].keywords.indexOf(filter) != -1) {
-  //     emojisContainer.innerHTML += 
-  //     '<a href="#" class="m-2">' + emojisObject[i].emoji + '</a>';
-  //   }
-  // input.onkeydown = (event) => { emojisContainer.innerHTML = "" };
-  // }
+function copyEmoji(e) {
+  let emojisContainer = document.getElementById("emojisDiv");
+  
+  navigator.clipboard.writeText(e.target.innerHTML);
+  // alert("Copied!");     
+  e.target.setAttribute('id','button');
+  emojisContainer.innerHTML += '<div id="tooltip">Copied!</div>';
+
+  const button = document.querySelector('#button');
+  const tooltip = document.querySelector('#tooltip');
+
+  const popperInstance = Popper.createPopper(button, tooltip)
+}
