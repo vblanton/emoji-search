@@ -7,7 +7,7 @@ function getRandomEmoji() {
 
 for (let i = 0; i < 3; i++) {
   document.getElementById('title').innerHTML += 
-  getRandomEmoji();
+  '<a href="index.html">' + getRandomEmoji() + '</a>';
 }
 
 
@@ -15,10 +15,11 @@ for (let i = 0; i < 3; i++) {
 
 function emojiSearch() {
 
-  let input, filter, emojisContainer; 
+  let input, filter, emojisContainer, defaultText; 
   input = document.getElementById('emojiSearch');
   filter = input.value.toLowerCase();
   emojisContainer = document.getElementById("emojisDiv");
+  defaultText = "<p class=\"text-base\">😸 Hello.</p><p class=\"text-base\">🔎 Search for an emoji using the search bar.</p><p class=\"text-base\">🖱️ Click on an emoji to copy it to your clipboard.</p>"
 
   // loop through emoji keyword descriptions and use Array.search() to return matches
   for (let i = 0; i < emojisObject.length; i++) {
@@ -26,7 +27,7 @@ function emojiSearch() {
     {
       if (filter.length > 2 && emojisObject[i].keywords[j].search(filter) != -1) {
         emojisContainer.innerHTML += 
-        '<a href="javascript:;" onclick="copyEmoji(event)" class="m-2">' + emojisObject[i].emoji + '</a>';
+        '<button onclick="copyEmoji(event)" class="transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300">' + emojisObject[i].emoji + '</button>';
         break;
       }
     }
