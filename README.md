@@ -1,5 +1,7 @@
 # emoji-search
-a fast emoji searcher using vanilla JS (beta)<br>
+a fast emoji searcher using vanilla JS<br>
 <br>
-Currently supports emojis up to Unicode Standard v15 (2022 September 13) <br>
-live test version: https://polite-kitten-0cf73e.netlify.app/#
+Currently supports emojis up to Unicode v15 (2022 September 13) <br>
+live test version: https://polite-kitten-0cf73e.netlify.app/#<br>
+<br>
+see index.html for list of possible future improvements
