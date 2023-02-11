@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -22,13 +22,20 @@
     Currently supports Unicode Standard v15 (Sep 2022)
 
     todo for v1:
-    make responsive
-    show tooltip on copy (using Popper, finish so that it moves upon another click) [WIP]
+    show tooltip on copy (using Popper) [WIP]
+     - remove popper dom element if one already exists
+     - add a popper dom element below button clicked
+      - https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+      - https://developer.mozilla.org/en-US/docs/Web/API/Element/remove
+     - or don't use popper at all. 
+      - just modify a tooltip to show immediately and style it
+      - have it say name of the emoji, and switch to "clicked" on click/press
 
     bugs:
     some way to avoid showing unsupported emojis?
+    on small screens no hover until clicked
 
-    todo v2:
+    todo v1.2+:
     random emojis button?
     emoji 8 ball?
     add settings and ability to include date it was added to unicode and description
@@ -38,16 +45,17 @@
   -->
 </head>
 <body>
-    <h1 id="title" class="text-6xl font-bold mx-auto mt-10 w-fit"></h1>
-    <input class="mx-auto my-5 placeholder:italic placeholder:text-slate-600 block border border-slate-300 rounded-md py-2 px-2 w-96 text-center shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Type here to find an emoji..." type="text" name="search" id="emojiSearch" onkeyup="emojiSearch()"/>
-    <div id="emojisDiv" class="flex-1 text-center mx-auto text-8xl py-8">
-      <!-- <div id="3-emojis" class="opacity-40 text-6xl"></div> -->
-      <p class="text-base transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300">😸 Hello.</p>
-      <p class="text-base mt-1 transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300">🔎 Search for an emoji using the search bar.</p>
-      <p class="text-base mt-1 transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300">🖱️ Click on an emoji to copy it to your clipboard.</p>
+    <h1 id="title" class="text-5xl sm:text-6xl font-bold mx-auto mt-10 text-center"></h1>
+    <input class="w-3/5 sm:w-96 mx-auto my-5 placeholder:italic placeholder:text-slate-600 block border border-slate-300 rounded-md p-2 text-center shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-sm sm:text-base" placeholder="Type here to find an emoji..." type="text" name="search" id="emojiSearch" onkeyup="emojiSearch()"/>
+    <div id="emojisDiv" class="flex-1 text-center mx-auto text-7xl sm:text-8xl py-8">
+      <p class="text-sm sm:text-base w-4/5 mx-auto">😸 Hello.</p>
+      <p class="text-sm sm:text-base w-4/5 mx-auto mt-1">🔎 Search for an emoji using the search bar.</p>
+      <p class="text-sm sm:text-base w-4/5 mx-auto mt-1">🖱️ Click on an emoji to copy it to your clipboard.</p>
     </div>
-    <div class="text-slate-400 mx-auto mt-8 w-72 text-center italic text-sm">Created by <a href="https://www.github.com/vblanton" class="hover:underline">Vlad Blanton</a> using <a href="https://www.tailwindcss.com" class="hover:underline">TailwindCSS</a></div>
     
+    <div class="text-slate-300 sm:text-slate-400 mx-auto mt-8 w-72 text-center italic text-sm">Created by <a href="https://www.github.com/vblanton" class="hover:underline">Vlad Blanton</a> using <a href="https://www.tailwindcss.com" class="hover:underline">TailwindCSS</a></div>
+    
+    <!-- Scripts -->
     <script src="./script.js"></script>
   </body>
 </html>

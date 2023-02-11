@@ -48,5 +48,5 @@ function copyEmoji(e) {
   const button = document.querySelector('#button');
   const tooltip = document.querySelector('#tooltip');
 
-  const popperInstance = Popper.createPopper(button, tooltip)
+  createPopper(button, tooltip);
 }
