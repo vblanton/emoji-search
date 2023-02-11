@@ -27,7 +27,7 @@ function emojiSearch() {
     {
       if (filter.length > 2 && emojisObject[i].keywords[j].search(filter) != -1) {
         emojisContainer.innerHTML += 
-        '<button onclick="copyEmoji(event)" class="transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300">' + emojisObject[i].emoji + '</button>';
+        '<button onclick="copyEmoji(event)" class="transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300 tooltip" data-text="'+ emojisObject[i].description +'">' + emojisObject[i].emoji + '</button>';
         break;
       }
     }
@@ -38,15 +38,7 @@ function emojiSearch() {
 // FUNCTION TO COPY EMOJI
 
 function copyEmoji(e) {
-  let emojisContainer = document.getElementById("emojisDiv");
-  
   navigator.clipboard.writeText(e.target.innerHTML);
-  // alert("Copied!");     
-  e.target.setAttribute('id','button');
-  emojisContainer.innerHTML += '<div id="tooltip">Copied!</div>';
+  e.target.setAttribute('data-text','Copied!')
 
-  const button = document.querySelector('#button');
-  const tooltip = document.querySelector('#tooltip');
-
-  createPopper(button, tooltip);
 }

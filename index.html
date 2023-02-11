@@ -4,44 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="./files/unicode-emoji.js"></script>
   <style>
-    #tooltip {
-      background: #333;
-      color: white;
-      font-weight: bold;
-      padding: 4px 8px;
-      font-size: 13px;
-      border-radius: 4px;
+    .tooltip:before {
+      content: attr(data-text); /* pull in tooltip text */
+      font-size: 14px;
+      position: absolute;
+      
+      /* alignment */
+      top: 100%;
+      left: 50%;
+      margin-top: 8px;
+      margin-left: -70px;
+      
+      /* basic styles */
+      width:140px;
+      padding:6px;
+      border-radius:10px;
+      background:#2a2a2a;
+      color: #fff;
+      text-align:center;
+
+      /* hide by default */
+      display:none; 
     }
+    .tooltip:hover:before {
+      display:block;
+    }
+ 
   </style>
   <!-- notes:
     live test version: https://polite-kitten-0cf73e.netlify.app/#
     full emoji list: https://unicode.org/emoji/charts/full-emoji-list.html
     Currently supports Unicode Standard v15 (Sep 2022)
 
-    todo for v1:
-    show tooltip on copy (using Popper) [WIP]
-     - remove popper dom element if one already exists
-     - add a popper dom element below button clicked
-      - https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
-      - https://developer.mozilla.org/en-US/docs/Web/API/Element/remove
-     - or don't use popper at all. 
-      - just modify a tooltip to show immediately and style it
-      - have it say name of the emoji, and switch to "clicked" on click/press
-
-    bugs:
-    some way to avoid showing unsupported emojis?
-    on small screens no hover until clicked
-
     todo v1.2+:
+    some way to avoid showing unsupported emojis?
+    improved search via a search library [fixes search bugs]
+      ignore spaces
+      enable 1 and 2 letter searches (if full match)
+      autofix misspelling
     random emojis button?
     emoji 8 ball?
     add settings and ability to include date it was added to unicode and description
       - hidden/visible add/remove class
       - dark/light mode
-    improve search to allow for 1 or 2 letter matches if it matches full description with 1 or 2 letters
+
   -->
 </head>
 <body>
