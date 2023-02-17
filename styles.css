@@ -1,0 +1,25 @@
+.tooltip:before {
+    content: attr(data-text); /* pull in tooltip text */
+    font-size: 14px;
+    position: absolute;
+    
+    /* alignment */
+    top: 100%;
+    left: 50%;
+    margin-top: 8px;
+    margin-left: -70px;
+    
+    /* basic styles */
+    width:140px;
+    padding:6px;
+    border-radius:10px;
+    background:#2a2a2a;
+    color: #fff;
+    text-align:center;
+
+    /* hide by default */
+    display:none; 
+  }
+  .tooltip:hover:before {
+    display:block;
+  }

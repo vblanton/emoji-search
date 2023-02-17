@@ -3,36 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Search!</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <script src="./files/unicode-emoji.js"></script>
-  <style>
-    .tooltip:before {
-      content: attr(data-text); /* pull in tooltip text */
-      font-size: 14px;
-      position: absolute;
-      
-      /* alignment */
-      top: 100%;
-      left: 50%;
-      margin-top: 8px;
-      margin-left: -70px;
-      
-      /* basic styles */
-      width:140px;
-      padding:6px;
-      border-radius:10px;
-      background:#2a2a2a;
-      color: #fff;
-      text-align:center;
-
-      /* hide by default */
-      display:none; 
-    }
-    .tooltip:hover:before {
-      display:block;
-    }
- 
-  </style>
+  <link rel="stylesheet" href="styles.css" />
   <!-- notes:
     live test version: https://polite-kitten-0cf73e.netlify.app/#
     full emoji list: https://unicode.org/emoji/charts/full-emoji-list.html
@@ -40,21 +15,19 @@
 
     todo v1.2+:
     some way to avoid showing unsupported emojis?
-    improved search via a search library [fixes search bugs]
-      ignore spaces
-      enable 1 and 2 letter searches (if full match)
+    improve search to:
       autofix misspelling
     random emojis button?
     emoji 8 ball?
     add settings and ability to include date it was added to unicode and description
       - hidden/visible add/remove class
-      - dark/light mode
+    dark mode
 
   -->
 </head>
 <body>
     <h1 id="title" class="text-5xl sm:text-6xl font-bold mx-auto mt-10 text-center"></h1>
-    <input class="w-3/5 sm:w-96 mx-auto my-5 placeholder:italic placeholder:text-slate-600 block border border-slate-300 rounded-md p-2 text-center shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-sm sm:text-base" placeholder="Type here to find an emoji..." type="text" name="search" id="emojiSearch" onkeyup="emojiSearch()"/>
+    <input class="w-3/5 sm:w-96 mx-auto my-5 placeholder:italic placeholder:text-slate-600 block border border-slate-300 rounded-md p-2 text-center shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-sm sm:text-base" placeholder="Type here to find an emoji..." type="text" name="search" id="emojiSearch" onkeyup="emojiSearch(event)"/>
     <div id="emojisDiv" class="flex-1 text-center mx-auto text-7xl sm:text-8xl py-8">
       <p class="text-sm sm:text-base w-4/5 mx-auto">😸 Hello.</p>
       <p class="text-sm sm:text-base w-4/5 mx-auto mt-1">🔎 Search for an emoji using the search bar.</p>
